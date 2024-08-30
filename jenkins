@@ -1,0 +1,63 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo "Building the code using Maven..."
+                // Example tool: Maven
+            }
+        }
+        
+        stage('Unit and Integration Tests') {
+            steps {
+                echo "Running unit and integration tests..."
+                // Example tools: JUnit, TestNG for unit tests; Selenium, Cucumber for integration tests
+            }
+        }
+        
+        stage('Code Analysis') {
+            steps {
+                echo "Performing code analysis..."
+                // Example tool: SonarQube for code quality analysis
+            }
+        }
+        
+        stage('Security Scan') {
+            steps {
+                echo "Performing security scan..."
+                // Example tool: OWASP ZAP or Snyk for security scanning
+            }
+        }
+        
+        stage('Deploy to Staging') {
+            steps {
+                echo "Deploying to staging environment..."
+                // Example tool: AWS CLI or Ansible to deploy to AWS EC2
+            }
+        }
+        
+        stage('Integration Tests on Staging') {
+            steps {
+                echo "Running integration tests on staging..."
+                // Example tools: Same as above (Selenium, Cucumber)
+            }
+        }
+        
+        stage('Deploy to Production') {
+            steps {
+                echo "Deploying to production environment..."
+                // Example tool: AWS CLI or Ansible to deploy to AWS EC2
+            }
+        }
+    }
+
+    post {
+        always {
+            mail to: 'ajayningappa@gmail.com.com',
+                 subject: "Pipeline ${currentBuild.fullDisplayName}",
+                 body: "Pipeline ${currentBuild.fullDisplayName} completed with status: ${currentBuild.currentResult}",
+                 attachLog: true
+        }
+    }
+}
